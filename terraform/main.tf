@@ -28,6 +28,10 @@ resource "azurerm_static_web_app" "primary_static_web_app" {
 resource "azurerm_dns_zone" "dns_zone" {
   name                = local.dns_zone_resource_name
   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
+    
+	lifecycle {
+		prevent_destroy = true
+	}
 }
 
 # resource "azurerm_static_web_app_custom_domain" "example" {
