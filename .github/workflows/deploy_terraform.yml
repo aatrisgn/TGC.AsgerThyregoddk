@@ -18,6 +18,18 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      deployPrd:
+        description: 'Deploy PRD Infrastructure?'
+        required: true
+        type: boolean
+        default: false
+      deployAppCode:
+        description: 'Deploy PRD application code?'
+        required: true
+        type: boolean
+        default: false
+
 
 permissions:
   id-token: write
@@ -27,15 +39,16 @@ permissions:
 jobs:
   build_job:
     runs-on: ubuntu-latest
-    environment: ENVIRONMENT_REFERENCE #Should be changed, lol
+    environment: dev
+    name: Deploy DEV infrastructure
     defaults:
       run:
         working-directory: ./Terraform
     
     env:
-      ARM_CLIENT_ID: "${{ secrets.CLIENT_ID_SECRET_REFERENCE }}"
-      ARM_SUBSCRIPTION_ID: "${{ secrets.SUBSCRIPTION_ID_SECRET_REFERENCE }}"
-      ARM_TENANT_ID: "${{ secrets.TENANT_ID_SECRET_REFERENCE }}"
+      ARM_CLIENT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}"
+      ARM_SUBSCRIPTION_ID: "${{ secrets.ASGERTHYREGODDK_DEV_SUBSCRIPTION_ID }}"
+      ARM_TENANT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}"
       ARM_USE_AZUREAD: true
 
     steps:
@@ -50,10 +63,10 @@ jobs:
     - name: Terraform Init
       run: |
         terraform init \
-        -backend-config=resource_group_name="${{ secrets.RESOURCE_GROUP_REFERENCE }}" \
-        -backend-config=storage_account_name="${{ secrets.STORAGE_ACCOUNT_REFERENCE }}" \
-        -backend-config=container_name="${{ secrets.CONTAINER_NAME_REFERENCE }}" \
-        -backend-config=key="KEY_NAME"
+        -backend-config=resource_group_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_RESOURCE_GROUP_NAME }}" \
+        -backend-config=storage_account_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_ACCOUNT_NAME }}" \
+        -backend-config=container_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_CONTAINER_NAME }}" \
+        -backend-config=key="asgerthyregoddk.dev"
         
     - name: Terraform Validate
       run: terraform validate
