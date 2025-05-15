@@ -43,7 +43,7 @@ jobs:
     name: Deploy DEV infrastructure
     defaults:
       run:
-        working-directory: ./Terraform
+        working-directory: ./terraform
     
     env:
       ARM_CLIENT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}"
