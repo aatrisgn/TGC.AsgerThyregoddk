@@ -25,10 +25,10 @@ resource "azurerm_static_web_app" "primary_static_web_app" {
   sku_size            = "Free"
 }
 
-# resource "azurerm_dns_zone" "dev_dns_zone" {
-#   name                = local.dns_zone_resource_name
-#   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
-# }
+resource "azurerm_dns_zone" "dns_zone" {
+  name                = local.dns_zone_resource_name
+  resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
+}
 
 # resource "azurerm_static_web_app_custom_domain" "example" {
 #   static_web_app_id = azurerm_static_web_app.primary_static_web_app.id
