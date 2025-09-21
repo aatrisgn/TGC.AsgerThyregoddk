@@ -1,0 +1,26 @@
+/* Contact Section */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.social-link {
+  text-decoration: none;
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.5rem;
+  transition: var(--transition);
+  font-weight: 500;
+  background: transparent;
+}
+
+.social-link:hover {
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
