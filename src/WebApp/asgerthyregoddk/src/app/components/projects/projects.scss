@@ -1,0 +1,83 @@
+/* Project Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: var(--card-background);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(30, 64, 175, 0.1);
+  transition: var(--transition);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(30, 64, 175, 0.15);
+  border-color: rgba(30, 64, 175, 0.3);
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+.project-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.project-card p {
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.project-card .social-link {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.hobby-projects-title {
+  margin-top: 4rem;
+  font-size: 2rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.hobby-card {
+  background: linear-gradient(to bottom right, var(--card-background), rgba(30, 64, 175, 0.05));
+  border: 1px solid rgba(30, 64, 175, 0.2);
+}
+
+.hobby-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(30, 64, 175, 0.15);
+  border-color: rgba(30, 64, 175, 0.4);
+}
+
+.hobby-card h3 {
+  color: var(--primary-color);
+  opacity: 0.9;
+}

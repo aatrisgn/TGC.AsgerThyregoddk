@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { SmoothScrollDirective } from '../../directives/smooth-scroll.directive';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [SmoothScrollDirective],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
