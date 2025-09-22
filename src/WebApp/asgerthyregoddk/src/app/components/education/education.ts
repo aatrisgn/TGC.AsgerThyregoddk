@@ -18,21 +18,21 @@ export class Education {
     },
     {
       icon: '📜',
-      title: 'Azure Security Engineer Associate - AZ 500',
+      title: 'Azure Security Engineer Associate',
       institution: 'Microsoft',
       year: '2023',
       description: 'Focus on how to implement security controls, maintain an organization’s security posture, and identify and remediate security vulnerabilities.'
     },
     {
       icon: '📜',
-      title: 'Developing Solutions for Microsoft Azure - AZ 204',
+      title: 'Developing Solutions for Azure',
       institution: 'Microsoft',
       year: '2023',
-      description: 'Focus on how to develop and maintain software solutions in Microsoft Azure'
+      description: 'Focus on how to develop, integrate and maintain software solutions in Microsoft Azure'
     },
     {
       icon: '🔒',
-      title: 'Azure Fundamentals - AZ 900',
+      title: 'Azure Fundamentals',
       institution: 'Microsoft',
       year: '2021',
       description: 'Introduction to Azure and the services it provides'
@@ -49,17 +49,17 @@ export class Education {
   educations = [
     {
       icon: '🎓',
-      title: 'Economics & IT',
+      title: 'Bachelor of Economics & IT',
       institution: 'Copenhagen Business School',
       year: '2013 - 2016',
-      description: 'Computer Science with focus on Software Engineering'
+      description: 'Combines business economics, organization, and information technology to educate specialists in IT-driven change. The program provides strategic and practical insight into designing, developing, and implementing IT systems within a business and organizational context.'
     },
     {
       icon: '🎓',
       title: 'Msc. Business Administration & Information Systems',
       institution: 'Copenhagen Business School',
       year: '2016 - 2018',
-      description: 'Computer Science with focus on Software Engineering'
+      description: 'Systems at CBS combines business management with digital and information technologies, teaching you how IT impacts organizations and how to design and implement IT solutions that add value to businesses.'
     }
   ];
 }
