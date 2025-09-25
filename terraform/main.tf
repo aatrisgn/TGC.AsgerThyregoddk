@@ -20,8 +20,8 @@ provider "azurerm" {
 resource "azurerm_dns_zone" "dns_zone" {
   name                = "asgerthyregod.dk"
   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
-    
-	lifecycle {
-		prevent_destroy = true
-	}
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
