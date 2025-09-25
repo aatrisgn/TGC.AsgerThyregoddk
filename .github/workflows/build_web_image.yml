@@ -44,7 +44,7 @@ jobs:
 
     - run: |
         az acr login --name tgclzdevacr.azurecr.io
-        cd src/TGC.HomeAutomation
+        cd src/WebApp/asgerthyregoddk
 
         docker build . -t $acr_registry/$image_name:${{ github.sha }}
         docker build . -t $acr_registry/$image_name:latest
