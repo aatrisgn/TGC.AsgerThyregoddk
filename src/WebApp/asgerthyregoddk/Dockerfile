@@ -10,7 +10,7 @@ RUN yarn install
 RUN npm run build --prod
 
 ### STAGE 2:RUN ###
-FROM --platform=linux/arm64 arm64v8/nginx:latest AS ngi
+FROM nginx:latest AS ngi
 #COPY --from=build /dist/src/app/wwwroot/assets/config /usr/share/nginx/html/assets/config
 
 COPY --from=build /dist/src/app/dist/asgerthyregoddk/browser /usr/share/nginx/html
