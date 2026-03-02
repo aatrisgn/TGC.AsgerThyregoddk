@@ -1,5 +1,5 @@
 ### STAGE 1:BUILD ###
-FROM node:24.0-alpine AS build
+FROM --platform=linux/amd64 node:24.0-alpine AS build
 
 WORKDIR /dist/src/app
 
