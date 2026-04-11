@@ -1,0 +1,14 @@
+---
+# Source: backend/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-asgerthyregoddk-svc
+  namespace: asgerthyregoddkdev
+spec:
+  selector:
+    app: dev-asgerthyregoddk-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
