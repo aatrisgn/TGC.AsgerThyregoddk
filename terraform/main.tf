@@ -1,22 +1,3 @@
-terraform {
-  backend "azurerm" {
-    use_azuread_auth = true
-    use_oidc         = true
-  }
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=4.0.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  use_oidc = true
-  features {}
-}
-
 resource "azurerm_dns_zone" "dns_zone" {
   name                = "asgerthyregod.dk"
   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
@@ -26,10 +7,26 @@ resource "azurerm_dns_zone" "dns_zone" {
   }
 }
 
-resource "azurerm_dns_a_record" "all" {
+resource "azurerm_dns_a_record" "apex" {
   ttl                 = 3600
   name                = "*"
-  records             = ["20.16.81.112"]
+  records             = ["137.117.132.68"]
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
+}
+
+resource "azurerm_dns_a_record" "dev" {
+  ttl                 = 3600
+  name                = "dev"
+  records             = ["137.117.132.68"]
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
+}
+
+resource "azurerm_dns_a_record" "tst" {
+  ttl                 = 3600
+  name                = "tst"
+  records             = ["137.117.132.68"]
   zone_name           = azurerm_dns_zone.dns_zone.name
   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
 }
