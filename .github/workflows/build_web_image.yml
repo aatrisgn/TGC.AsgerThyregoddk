@@ -6,12 +6,12 @@ on:
   push:
     branches: ["main"]
     paths:
-    - 'src/WebApp'
+    - 'src/WebApp/**'
     - '.github/workflows/build_web_image.yml'
   pull_request:
     branches: ["main"]
     paths:
-    - 'src/WebApp'
+    - 'src/WebApp/**'
     - '.github/workflows/build_web_image.yml'
   workflow_dispatch:
 
@@ -64,7 +64,6 @@ jobs:
       run: |
         helm template backend ./helm \
           -f ./helm/values-dev.yaml \
-          --set image.tag=${{ github.sha }} \
           --output-dir ./deployment/dev
 
     - name: Commit rendered manifests
