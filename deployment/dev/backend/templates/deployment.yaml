@@ -24,6 +24,6 @@ spec:
       - name: acr-pull
       containers:
       - name: asgerthyregoddk-pod
-        image: tgclzdevacr.azurecr.io/tgc-atdk-app:5d34c94889577d1a958d35fd7801a4ea0f511d8d
+        image: tgclzdevacr.azurecr.io/tgc-atdk-app:325ff3abb4d93e0bd0f5e891012064836f80cca9
         ports:
         - containerPort: 80
