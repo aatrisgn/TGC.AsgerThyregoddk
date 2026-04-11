@@ -41,7 +41,7 @@ jobs:
         run: |
           ls
 
-          cp -r asgerthyregoddk/deployment/dev/*  ./argocd/asgerthyregoddk/dev/
+          cp -r asgerthyregoddk/deployment/dev/backend/templates/*  ./argocd/asgerthyregoddk/dev/
 
           cd argocd && git pull
           git config user.name "github-actions[bot]"
