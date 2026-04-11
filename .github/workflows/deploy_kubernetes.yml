@@ -26,7 +26,10 @@ jobs:
     name: Generate DEV manifests
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          path: asgerthyregoddk
+
       - name: Checkout ArgoCD repo
         uses: actions/checkout@v4
         with:
@@ -39,7 +42,8 @@ jobs:
           cd argocd && git pull
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          ls
+          cp -r ./asgerthyregoddk/deployment/dev/*  ./argocd/asgerthyregoddk/dev/
+          git status
 
       # - name: Commit rendered manifests
       #   run: |
