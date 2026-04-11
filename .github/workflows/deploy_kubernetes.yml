@@ -39,15 +39,15 @@ jobs:
 
       - name: Commit rendered manifests
         run: |
-          ls
-
           cp -r asgerthyregoddk/deployment/dev/backend/templates/*  ./argocd/asgerthyregoddk/dev/
 
           cd argocd && git pull
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git status
+          git add .
+          git diff --cached --quiet || git commit -m "chore: render dev manifests [${{ github.sha }}] [skip ci]"
+          git push
 
       # - name: Commit rendered manifests
       #   run: |
