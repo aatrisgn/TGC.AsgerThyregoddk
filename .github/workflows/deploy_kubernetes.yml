@@ -36,6 +36,12 @@ jobs:
           repository: aatrisgn/TGC.ArgoCD
           token: ${{ secrets.TESTING }}
           path: argocd
+      
+      - name: Render manifests
+        run: |
+          helm template backend ./helm \
+            -f ./helm/values-dev.yaml \
+            --output-dir ./deployment/dev
 
       - name: Commit rendered manifests
         run: |
@@ -48,14 +54,6 @@ jobs:
           git add .
           git diff --cached --quiet || git commit -m "chore: render dev manifests [${{ github.sha }}] [skip ci]"
           git push
-
-      # - name: Commit rendered manifests
-      #   run: |
-      #     git config user.name "github-actions[bot]"
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
-      #     git add deployment/dev/
-      #     git diff --cached --quiet || git commit -m "chore: render dev manifests [${{ github.sha }}] [skip ci]"
-      #     git push
 
   generate-prd:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.event.inputs.environment == 'prd'
