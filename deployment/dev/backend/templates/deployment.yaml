@@ -1,0 +1,29 @@
+---
+# Source: backend/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-asgerthyregoddk-deployment
+  namespace: asgerthyregoddkdev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-asgerthyregoddk-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: dev-asgerthyregoddk-app
+        version: v1
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: ""
+      serviceAccountName: sa
+      imagePullSecrets:
+      - name: acr-pull
+      containers:
+      - name: asgerthyregoddk-pod
+        image: tgclzdevacr.azurecr.io/tgc-atdk-app:5d34c94889577d1a958d35fd7801a4ea0f511d8d
+        ports:
+        - containerPort: 80
