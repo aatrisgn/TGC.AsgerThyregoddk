@@ -39,10 +39,12 @@ jobs:
 
       - name: Commit rendered manifests
         run: |
+          cp -r ./asgerthyregoddk/deployment/dev/*  ./argocd/asgerthyregoddk/dev/
+
           cd argocd && git pull
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp -r ./asgerthyregoddk/deployment/dev/*  ./argocd/asgerthyregoddk/dev/
+
           git status
 
       # - name: Commit rendered manifests
