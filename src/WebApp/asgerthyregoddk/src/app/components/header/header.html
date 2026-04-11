@@ -1,12 +1,38 @@
 <header class="header">
   <nav class="nav">
-      <div class="logo">Asger Thyregod</div>
-      <ul class="nav-links">
-          <li><a href="#about" [smoothScroll]="'#about'">About</a></li>
-          <li><a href="#experience" [smoothScroll]="'#experience'">Experience</a></li>
-          <li><a href="#education" [smoothScroll]="'#education'">Education</a></li>
-          <li><a href="#projects" [smoothScroll]="'#projects'">Projects</a></li>
-          <li><a href="#contact" [smoothScroll]="'#contact'">Contact</a></li>
-      </ul>
+    <div class="logo">Asger Thyregod</div>
+
+    <button
+      class="burger"
+      [class.open]="menuOpen"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="#about"      [smoothScroll]="'#about'">About</a></li>
+      <li><a href="#experience" [smoothScroll]="'#experience'">Experience</a></li>
+      <li><a href="#skills"     [smoothScroll]="'#skills'">Skills</a></li>
+      <li><a href="#education"  [smoothScroll]="'#education'">Education</a></li>
+      <li><a href="#projects"   [smoothScroll]="'#projects'">Projects</a></li>
+      <li><a href="#contact"    [smoothScroll]="'#contact'">Contact</a></li>
+    </ul>
   </nav>
 </header>
+
+<!-- Mobile overlay lives outside .header so backdrop-filter doesn't trap it -->
+<div class="mobile-menu" [class.open]="menuOpen" [attr.aria-hidden]="!menuOpen">
+  <ul>
+    <li><a href="#about"      [smoothScroll]="'#about'"      (click)="closeMenu()">About</a></li>
+    <li><a href="#experience" [smoothScroll]="'#experience'" (click)="closeMenu()">Experience</a></li>
+    <li><a href="#skills"     [smoothScroll]="'#skills'"     (click)="closeMenu()">Skills</a></li>
+    <li><a href="#education"  [smoothScroll]="'#education'"  (click)="closeMenu()">Education</a></li>
+    <li><a href="#projects"   [smoothScroll]="'#projects'"   (click)="closeMenu()">Projects</a></li>
+    <li><a href="#contact"    [smoothScroll]="'#contact'"    (click)="closeMenu()">Contact</a></li>
+  </ul>
+</div>

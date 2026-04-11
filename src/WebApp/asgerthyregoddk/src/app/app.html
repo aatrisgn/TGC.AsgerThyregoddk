@@ -4,6 +4,7 @@
   <app-welcome/>
   <app-about/>
   <app-experience/>
+  <app-skills/>
   <app-education/>
   <app-projects/>
 </main>
@@ -11,3 +12,10 @@
 <app-contact/>
 
 <app-footer/>
+
+<button
+  class="scroll-top"
+  *ngIf="showScrollTop"
+  (click)="scrollToTop()"
+  aria-label="Scroll to top"
+>&#8679;</button>

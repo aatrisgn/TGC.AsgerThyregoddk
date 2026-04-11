@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { SmoothScrollDirective } from '../../directives/smooth-scroll.directive';
 
 @Component({
@@ -8,5 +8,18 @@ import { SmoothScrollDirective } from '../../directives/smooth-scroll.directive'
   styleUrl: './header.scss'
 })
 export class Header {
+  menuOpen = false;
 
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMenu();
+  }
 }

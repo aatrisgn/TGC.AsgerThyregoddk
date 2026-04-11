@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ExperienceItem {
@@ -18,12 +18,13 @@ export class Experience {
   experiences: ExperienceItem[] = [
     {
       date: 'August 2024 – Present',
-      title: 'Delivery Lead',
+      title: 'Delivery Lead & Software Engineer',
       company: 'cVation / Financial Software',
       description: [
         'Leading a team of 8 software engineers located in Denmark and Lithuania',
         'Large scale cloud environments utilizing Azure, Citrix and .Net',
         'Focus on improving stability of Citrix environment in a multi-tenant setup and migrating clients from on-premise to cloud',
+        'Created with first cross-organization Kubernetes deployment utilizing ArgoCD and Helm',
       ]
     },
     {
@@ -32,7 +33,9 @@ export class Experience {
       company: 'cVation / Financial Software',
       description: [
         'Taking a PoC to a production-ready solution',
+        'Wrote Cosmos Repository pattern library from scratch to abstract away complexities of Cosmos DB and provide a consistent API for data access',
         'Creating and maintaining modern cloud-first SaaS solutions within Azure, .Net and Angular',
+        'Assisted with spear-heading custom multi-tenant OpenID Connect implementation for authentication and authorization',
       ]
     },
     {
@@ -42,6 +45,7 @@ export class Experience {
       description: [
         'Consultant for Netcompany assisting a large Danish financial institution',
         'Discovery and pre-analysis for modernizing their IT capabilities for the commercial sector',
+        'Technical responsible for deliverables for a team of 7 consultants.'
       ]
     },
     {
@@ -52,6 +56,10 @@ export class Experience {
         'Consultant for Netcompany assisting a government agency',
         'Maintaining and developing IT-systems within the .Net ecosystem and Windows Server',
         'Responsible for technical quality and delivery of new features',
+        'Upgrading to newest Windows servers',
+        'Assisting with making integration for data delivery to National Archives',
+        'Lead implementation of NGDP',
+        'Troubleshooting MSSQL performance issues'
       ]
     },
     {
@@ -70,7 +78,7 @@ export class Experience {
       company: 'Nordic Insurance Software',
       description: [
         'First full-time position as a software developer',
-        'Developing and automating internal processes utilizing Octopus Deploy',
+        'Developed fully-automated client test/sandbox environment deployments utilizing Octopus Deploy',
         'Assisting with maintaining existing insurance products in .Net Framework',
       ]
     },
@@ -79,8 +87,8 @@ export class Experience {
       title: 'Student Software Developer',
       company: 'Nordic Insurance Software',
       description: [
-        'Developing and automating internal processes utilizing Octopus Deploy',
-        'Assisting with maintaining existing insurance products in .Net Framework',
+        'Developed and automated internal processes utilizing Octopus Deploy',
+        'Assisted with maintaining existing insurance products in .Net Framework',
       ]
     },
     {
@@ -111,5 +119,10 @@ export class Experience {
 
   close(): void {
     this.selected = null;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.close();
   }
 }
