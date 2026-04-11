@@ -42,6 +42,7 @@ jobs:
           helm template backend ./helm \
             -f ./helm/values-dev.yaml \
             --output-dir ./deployment/dev
+        working-directory: asgerthyregoddk
 
       - name: Commit rendered manifests
         run: |
