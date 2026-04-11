@@ -21,7 +21,7 @@
 }
 
 .hero h1 {
-  font-size: 4.5rem;
+  font-size: clamp(1.75rem, 5vw, 4.5rem);
   font-weight: 800;
   margin-bottom: 1rem;
   background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
