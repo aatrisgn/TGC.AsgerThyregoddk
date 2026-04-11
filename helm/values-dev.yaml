@@ -3,4 +3,4 @@ namespace: asgerthyregoddkdev
 
 httproute:
   hostname: dev.asgerthyregod.dk
-  sectionName: asgerthyregod-https-dev
+  sectionName: dev-asgerthyregod-https
