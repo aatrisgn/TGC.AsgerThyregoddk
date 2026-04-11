@@ -1,0 +1,6 @@
+env: prd
+namespace: asgerthyregoddkprd
+
+httproute:
+  hostname: asgerthyregod.dk
+  sectionName: asgerthyregod-https-prd

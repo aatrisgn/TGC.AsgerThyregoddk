@@ -1,0 +1,25 @@
+env: dev
+namespace: asgerthyregoddkdev
+appName: asgerthyregoddk
+
+replicaCount: 1
+
+image:
+  repository: tgclzdevacr.azurecr.io/tgc-atdk-app
+  tag: latest
+  pullSecret: acr-pull
+
+service:
+  port: 80
+
+serviceAccount:
+  name: sa
+
+httproute:
+  hostname: dev.asgerthyregod.dk
+  sectionName: asgerthyregod-https-dev
+  gatewayName: gateway
+  gatewayNamespace: gatewayapi
+
+nodeSelector:
+  "node-role.kubernetes.io/worker": ""

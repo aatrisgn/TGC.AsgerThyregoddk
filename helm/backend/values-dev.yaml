@@ -1,0 +1,6 @@
+env: dev
+namespace: asgerthyregoddkdev
+
+httproute:
+  hostname: dev.asgerthyregod.dk
+  sectionName: asgerthyregod-https-dev
