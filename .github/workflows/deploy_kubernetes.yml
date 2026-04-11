@@ -39,6 +39,8 @@ jobs:
 
       - name: Commit rendered manifests
         run: |
+          ls
+
           cp -r ./asgerthyregoddk/deployment/dev/*  ./argocd/asgerthyregoddk/dev/
 
           cd argocd && git pull
