@@ -27,7 +27,11 @@ catch {
 }
 
 $sortedTags = $tagList.Tags `
-    | Sort-Object -Property {  [System.DateTime]::ParseExact($_.LastUpdateTime, "M/d/yyyy h:mm:ss tt", $null)  } -Descending ` #Needed since apparently MS like to present datetimes as strings
+    | Sort-Object -Property {
+        [System.DateTimeOffset]::Parse(
+            $_.LastUpdateTime.Trim(),
+            [System.Globalization.CultureInfo]::InvariantCulture)
+    } -Descending `
     | Select-Object -ExpandProperty Name
 
 if ($inputTag -eq 'latest') {
