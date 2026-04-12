@@ -109,18 +109,16 @@ jobs:
         if: github.event.inputs.applyTF == 'true'
         run: terraform apply -auto-approve tfplan
         working-directory: asgerthyregoddk/terraform/deployment
-#cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
+
       - name: Commit rendered manifests
         run: |
           cd argocd && git pull
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git diff
-
-      #     git add .
-      #     git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
-      #     git push
+          git add .
+          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
+          git push
 
   generate-prd:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.event.inputs.environment == 'prd'
