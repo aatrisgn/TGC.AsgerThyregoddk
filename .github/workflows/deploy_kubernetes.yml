@@ -50,7 +50,7 @@ jobs:
           path: argocd
       
       - name: Install Terraform
-        run: bash "${{ github.workspace }}/.github/scripts/install_terraform.sh" 
+        run: bash "${{ github.workspace }}/asgerthyregoddk/.github/scripts/install_terraform.sh" 
 
       - name: 'Az CLI login'
         uses: azure/login@v3
