@@ -14,6 +14,10 @@ on:
         options:
           - dev
           - prd
+      applyTF:
+        description: 'Apply Terraform?'
+        required: true
+        type: boolean
       version:
         description: 'Image tag to deploy (defaults to latest tag in ACR)'
         required: false
@@ -99,12 +103,19 @@ jobs:
         id: plan
         run: terraform plan -input=false -var-file="envs/vars.dev.tfvars" -out=tfplan
         working-directory: asgerthyregoddk/terraform/deployment
+
+      - name: Terraform Apply
+        if: github.event.inputs.applyTF == 'true'
+        run: terraform apply -auto-approve tfplan
+        working-directory: asgerthyregoddk/terraform/deployment
 #cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
-      # - name: Commit rendered manifests
-      #   run: |
-      #     cd argocd && git pull
-      #     git config user.name "github-actions[bot]"
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit rendered manifests
+        run: |
+          cd argocd && git pull
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git diff
 
       #     git add .
       #     git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"

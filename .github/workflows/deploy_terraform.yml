@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - 'terraform/**'
+      - 'terraform/infrastructure/**'
   pull_request:
     branches: ["main"]
   workflow_dispatch:
