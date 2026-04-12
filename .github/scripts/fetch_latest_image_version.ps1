@@ -14,8 +14,6 @@ $ErrorActionPreference = "Stop"
 
 $registryName = $acrUrl -replace '^https?://', '' -replace '\.azurecr\.io.*$', ''
 
-Update-PSResource Az -TrustRepository -Confirm
-
 Write-Host "Registry : $registryName"
 Write-Host "Image    : $imageName"
 Write-Host "Input tag: $inputTag"
@@ -29,7 +27,7 @@ catch {
 }
 
 $sortedTags = $tagList.Tags `
-    | Sort-Object -Property {  [System.DateTime]::ParseExact($_.LastUpdateTime, "M/d/yyyy h:mm:ss tt zzz", $null)  } -Descending ` #Needed since apparently MS like to present datetimes as strings
+    | Sort-Object -Property {  [System.DateTime]::ParseExact($_.LastUpdateTime, "M/d/yyyy h:mm:ss tt", $null)  } -Descending ` #Needed since apparently MS like to present datetimes as strings
     | Select-Object -ExpandProperty Name
 
 if ($inputTag -eq 'latest') {
