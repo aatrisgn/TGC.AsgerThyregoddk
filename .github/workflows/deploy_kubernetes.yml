@@ -44,15 +44,16 @@ jobs:
           path: argocd
 
       - name: 'Az CLI login'
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}
           tenant-id: ${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}
           subscription-id: ${{ secrets.ASGERTHYREGODDK_DEV_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
 
       - name: Resolve image tag
         id: resolve_tag
-        uses: azure/powershell@v2
+        uses: azure/powershell@v3
         with:
           azPSVersion: latest
           inlineScript: |
@@ -105,15 +106,16 @@ jobs:
           path: argocd
 
       - name: Az CLI login
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.ASGERTHYREGODDK_PRD_CLIENT_ID }}
           tenant-id: ${{ secrets.ASGERTHYREGODDK_PRD_TENANT_ID }}
           subscription-id: ${{ secrets.ASGERTHYREGODDK_PRD_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
 
       - name: Resolve image tag
         id: resolve_tag
-        uses: azure/powershell@v2
+        uses: azure/powershell@v3
         with:
           azPSVersion: latest
           inlineScript: |
