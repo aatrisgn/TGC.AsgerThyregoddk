@@ -78,11 +78,11 @@ jobs:
           cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
 
           cd argocd && git pull
-          git config user.name "github-actions[TGC.AsgerThyregodDK bot]"
-          git config user.email "github-actions[TGC.AsgerThyregodDK bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add .
-          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK bot] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
+          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
           git push
 
   generate-prd:
@@ -137,9 +137,9 @@ jobs:
           cp -r asgerthyregoddk/deployment/prd/backend/templates/* ./argocd/asgerthyregoddk/prd/
 
           cd argocd && git pull
-          git config user.name "github-actions[TGC.AsgerThyregodDK bot]"
-          git config user.email "github-actions[TGC.AsgerThyregodDK bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add .
-          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK bot] chore: render prd manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
+          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render prd manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
           git push
