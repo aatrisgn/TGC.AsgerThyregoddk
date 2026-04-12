@@ -14,7 +14,7 @@ $ErrorActionPreference = "Stop"
 
 $registryName = $acrUrl -replace '^https?://', '' -replace '\.azurecr\.io.*$', ''
 
-Update-PSResource Az.ContainerRegistry -Force
+Update-PSResource Az -TrustRepository -Confirm
 
 Write-Host "Registry : $registryName"
 Write-Host "Image    : $imageName"
