@@ -12,10 +12,9 @@ param(
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = "Stop"
 
-Update-PSResource az -version 15.5.0
-
-# Strip trailing slash and protocol from ACR URL to get the registry name
 $registryName = $acrUrl -replace '^https?://', '' -replace '\.azurecr\.io.*$', ''
+
+Get-InstalledModule -name "Az.ContainerRegistry"
 
 Write-Host "Registry : $registryName"
 Write-Host "Image    : $imageName"
