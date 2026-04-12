@@ -30,7 +30,9 @@ jobs:
       acr_registry: tgclzdevacr.azurecr.io
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
@@ -42,7 +44,7 @@ jobs:
       uses: azure/setup-helm@v3
 
     - name: 'Az CLI login'
-      uses: azure/login@v2
+      uses: azure/login@v3
       with:
         client-id: ${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}
         tenant-id: ${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}
@@ -51,25 +53,41 @@ jobs:
     - name: Login to ACR
       run: az acr login --name tgclzdevacr.azurecr.io
 
+    - name: Generate version
+      id: version
+      shell: pwsh
+      run: ./.github/scripts/generate_version.ps1
+
     - name: Build and publish webapp to ACR
       run: |
+        TAGS="--tag $acr_registry/$image_name:${{ steps.version.outputs.version }}"
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          TAGS="$TAGS --tag $acr_registry/$image_name:latest"
+        fi
         docker buildx build . \
           --platform linux/amd64,linux/arm64 \
-          --tag $acr_registry/$image_name:${{ github.sha }} \
-          --tag $acr_registry/$image_name:latest \
+          $TAGS \
           --push
       working-directory: ${{ env.app_path }}
-
-    - name: Render manifests
-      run: |
-        helm template backend ./helm \
-          -f ./helm/values-dev.yaml \
-          --output-dir ./deployment/dev
-
-    - name: Commit rendered manifests
+    
+    - name: Tag commit
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add deployment/dev/
-        git diff --cached --quiet || git commit -m "chore: render dev manifests [${{ github.sha }}] [skip ci]"
-        git push
+        git tag ${{ steps.version.outputs.version }}
+        git push origin ${{ steps.version.outputs.version }}
+
+    # - name: Render manifests
+    #   run: |
+    #     helm template backend ./helm \
+    #       -f ./helm/values-dev.yaml \
+    #       --output-dir ./deployment/dev
+
+    # - name: Commit rendered manifests
+    #   run: |
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
+    #     git add deployment/dev/
+    #     git diff --cached --quiet || git commit -m "chore: render dev manifests [${{ github.sha }}] [skip ci]"
+    #     git push
