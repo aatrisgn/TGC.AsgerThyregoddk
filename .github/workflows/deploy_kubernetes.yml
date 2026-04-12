@@ -96,7 +96,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -input=false -var-file="envs/vars.dev.tfvars" -out=tfplan
-        working-directory: terraform/deployment
+        working-directory: asgerthyregoddk/terraform/deployment
 #cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
       # - name: Commit rendered manifests
       #   run: |
