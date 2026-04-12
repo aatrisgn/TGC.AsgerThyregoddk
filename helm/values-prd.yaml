@@ -3,4 +3,4 @@ namespace: asgerthyregoddkprd
 
 httproute:
   hostname: asgerthyregod.dk
-  sectionName: asgerthyregod-https-prd
+  sectionName: prd-asgerthyregod-dk-https

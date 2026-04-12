@@ -135,6 +135,7 @@ jobs:
 
       - name: Commit rendered manifests
         run: |
+          mkdir -p ./argocd/asgerthyregoddk/prd
           cp -r asgerthyregoddk/deployment/prd/backend/templates/* ./argocd/asgerthyregoddk/prd/
 
           cd argocd && git pull
