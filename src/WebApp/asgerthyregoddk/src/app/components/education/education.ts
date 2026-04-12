@@ -49,17 +49,17 @@ export class Education {
   educations = [
     {
       icon: '🎓',
-      title: 'Bachelor of Economics & IT',
-      institution: 'Copenhagen Business School',
-      year: '2013 - 2016',
-      description: 'Combines business economics, organization, and information technology to educate specialists in IT-driven change. The program provides strategic and practical insight into designing, developing, and implementing IT systems within a business and organizational context.'
-    },
-    {
-      icon: '🎓',
       title: 'Msc. Business Administration & Information Systems',
       institution: 'Copenhagen Business School',
       year: '2016 - 2018',
       description: 'Systems at CBS combines business management with digital and information technologies, teaching you how IT impacts organizations and how to design and implement IT solutions that add value to businesses.'
+    },
+    {
+      icon: '🎓',
+      title: 'Bachelor of Economics & IT',
+      institution: 'Copenhagen Business School',
+      year: '2013 - 2016',
+      description: 'Combines business economics, organization, and information technology to educate specialists in IT-driven change. The program provides strategic and practical insight into designing, developing, and implementing IT systems within a business and organizational context.'
     }
   ];
 }
