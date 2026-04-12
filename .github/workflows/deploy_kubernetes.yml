@@ -31,6 +31,12 @@ jobs:
     name: Generate DEV manifests
     environment: dev
 
+    env:
+      ARM_CLIENT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}"
+      ARM_SUBSCRIPTION_ID: "${{ secrets.ASGERTHYREGODDK_DEV_SUBSCRIPTION_ID }}"
+      ARM_TENANT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}"
+      ARM_USE_AZUREAD: true
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,6 +48,9 @@ jobs:
           repository: aatrisgn/TGC.ArgoCD
           token: ${{ secrets.TESTING }}
           path: argocd
+      
+      - name: Install Terraform
+        run: bash "${{ github.workspace }}/.github/scripts/install_terraform.sh" 
 
       - name: 'Az CLI login'
         uses: azure/login@v3
@@ -73,17 +82,31 @@ jobs:
             --output-dir ./deployment/dev
         working-directory: asgerthyregoddk
 
-      - name: Commit rendered manifests
+      - name: Terraform Init
         run: |
-          cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
+          terraform init \
+          -backend-config=resource_group_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_RESOURCE_GROUP_NAME }}" \
+          -backend-config=storage_account_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_ACCOUNT_NAME }}" \
+          -backend-config=container_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_CONTAINER_NAME }}" \
+          -backend-config=key="asgerthyregoddk.deployment.dev"
+          
+      - name: Terraform Validate
+        run: terraform validate
 
-          cd argocd && git pull
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false -var-file="envs/vars.dev.tfvars" -out=tfplan
+        working-directory: terraform/deployment
+#cp -r asgerthyregoddk/deployment/dev/backend/templates/* ./argocd/asgerthyregoddk/dev/
+      # - name: Commit rendered manifests
+      #   run: |
+      #     cd argocd && git pull
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add .
-          git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
-          git push
+      #     git add .
+      #     git diff --cached --quiet || git commit -m "[TGC.AsgerThyregodDK] chore: render dev manifests [${{ steps.resolve_tag.outputs.IMAGE_TAG }}]"
+      #     git push
 
   generate-prd:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.event.inputs.environment == 'prd'
@@ -133,10 +156,12 @@ jobs:
             --output-dir ./deployment/prd
         working-directory: asgerthyregoddk
 
+
+        # mkdir -p ./argocd/asgerthyregoddk/prd
+        #   cp -r asgerthyregoddk/deployment/prd/backend/templates/* ./argocd/asgerthyregoddk/prd/
       - name: Commit rendered manifests
         run: |
-          mkdir -p ./argocd/asgerthyregoddk/prd
-          cp -r asgerthyregoddk/deployment/prd/backend/templates/* ./argocd/asgerthyregoddk/prd/
+          
 
           cd argocd && git pull
           git config user.name "github-actions[bot]"
