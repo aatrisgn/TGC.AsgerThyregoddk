@@ -9,7 +9,7 @@ resource "azurerm_dns_zone" "dns_zone" {
 
 resource "azurerm_dns_a_record" "apex" {
   ttl                 = 3600
-  name                = "*"
+  name                = "@"
   records             = ["137.117.132.68"]
   zone_name           = azurerm_dns_zone.dns_zone.name
   resource_group_name = data.azurerm_resource_group.predefined_resource_group.name
