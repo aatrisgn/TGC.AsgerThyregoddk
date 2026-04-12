@@ -89,9 +89,11 @@ jobs:
           -backend-config=storage_account_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_ACCOUNT_NAME }}" \
           -backend-config=container_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_CONTAINER_NAME }}" \
           -backend-config=key="asgerthyregoddk.deployment.dev"
+        working-directory: asgerthyregoddk/terraform/deployment
           
       - name: Terraform Validate
         run: terraform validate
+        working-directory: asgerthyregoddk/terraform/deployment
 
       - name: Terraform Plan
         id: plan
