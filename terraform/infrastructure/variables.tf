@@ -1,4 +1,4 @@
-variable "resource_group_name" {
+variable "project_name" {
   type = string
 }
 variable "organization_id" {
