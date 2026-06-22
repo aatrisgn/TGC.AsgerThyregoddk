@@ -43,7 +43,7 @@ jobs:
         -backend-config=access_key="${{ secrets.ASGERTHYREGODDK_PRD_STATE_ACCESS_KEY }}" \
         -backend-config=secret_key="${{ secrets.ASGERTHYREGODDK_PRD_STATE_SECRET_ACCESS_KEY }}" \
         -backend-config=bucket="${{ secrets.ASGERTHYREGODDK_PRD_STATE_BUCKET_NAME }}" \
-        -backend-config=key="statefiles/asgerthyregoddk.prd.tfstate"
+        -backend-config=key="asgerthyregoddk.prd.tfstate"
         
     - name: Terraform Validate
       run: terraform validate
