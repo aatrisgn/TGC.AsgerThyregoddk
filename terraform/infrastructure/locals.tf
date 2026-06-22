@@ -1,3 +1,3 @@
 locals {
-  cluster_domains = ["@","dev","tst",]
+  cluster_domains = ["@", "dev", "tst"]
 }
