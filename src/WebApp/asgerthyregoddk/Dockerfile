@@ -3,6 +3,8 @@ FROM node:latest AS build
 
 WORKDIR /dist/src/app
 
+RUN npm install -g yarn
+
 RUN npm cache clean --force
 
 COPY . .
@@ -11,10 +13,8 @@ RUN npm run build --prod
 
 ### STAGE 2:RUN ###
 FROM nginx:latest AS ngi
-#COPY --from=build /dist/src/app/wwwroot/assets/config /usr/share/nginx/html/assets/config
 
 COPY --from=build /dist/src/app/dist/asgerthyregoddk/browser /usr/share/nginx/html
-#COPY --from=build /dist/src/app/wwwroot/assets/config/runtime.config.json /usr/share/nginx/html/assets/config/runtime.config.json
 
 COPY /nginx.conf /etc/nginx/conf.d/default.conf
 
