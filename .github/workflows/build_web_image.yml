@@ -27,7 +27,7 @@ jobs:
     env:
       image_name: tgc-atdk-app
       app_path: src/WebApp/asgerthyregoddk
-      sccr_registry: rg.fr-par.scw.cloud/crn-shared-dev-scr-lz-fr-par
+      sccr_registry: rg.fr-par.scw.cloud/crn-shared-prd-scr-lz-fr-par
 
     steps:
     - uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
           TAGS="$TAGS --tag ${{ env.sccr_registry }}/${{ env.image_name }}:latest"
         fi
         docker buildx build . \
-          --platform linux/amd64,linux/arm64 \
+          --platform linux/amd64 \
           $TAGS \
           --push
       working-directory: ${{ env.app_path }}
