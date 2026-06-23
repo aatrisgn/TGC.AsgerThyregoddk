@@ -21,15 +21,16 @@ jobs:
     uses: aatrisgn/TGC.LandingZone/.github/templates/deploy_terraform_scaleway.yml@main
     with:
       working_directory: ./terraform/infrastructure
+      state_key: "asgerthyregoddk.prd.tfstate"
+      applyTF: true
+      var_file_path: "envs/vars.prd.tfvars"
+    secrets:
       deployment_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
       deployment_secret_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
       state_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_STATE_ACCESS_KEY }}"
       state_secret_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_STATE_SECRET_ACCESS_KEY }}"
       state_bucket_name: "${{ secrets.ASGERTHYREGODDK_PRD_STATE_BUCKET_NAME }}"
-      state_key: "asgerthyregoddk.prd.tfstate"
       organization_id: "${{ secrets.ASGERTHYREGODDK_PRD_ORGANIZATION_ID }}"
-      applyTF: true
-      var_file_path: "envs/vars.prd.tfvars"
 
   # build_job:
   #   runs-on: ubuntu-latest
