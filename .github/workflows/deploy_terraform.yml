@@ -18,7 +18,7 @@ permissions:
 jobs:
 
   call-build:
-    uses: aatrisgn/TGC.LandingZone/.github/workflows/deploy_terraform_scaleway.yml@main
+    uses: aatrisgn/TGC.LandingZones/.github/workflows/deploy_terraform_scaleway.yml@main
     with:
       working_directory: ./terraform/infrastructure
       state_key: "asgerthyregoddk.prd.tfstate"
