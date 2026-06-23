@@ -1,4 +1,4 @@
-resource "scaleway_domain_record" "www2" {
+resource "scaleway_domain_record" "a_records" {
   for_each = toset(local.cluster_domains)
 
   dns_zone = "asgerthyregod.dk"
