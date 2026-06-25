@@ -52,6 +52,9 @@ jobs:
       
       - name: Install Terraform
         run: bash "${{ github.workspace }}/asgerthyregoddk/.github/scripts/install_terraform.sh" 
+      
+      - name: Install Scaleway CLI
+        run: bash "${{ github.workspace }}/asgerthyregoddk/.github/scripts/install_scaleway.sh" 
 
       # TODO: Rewrite this
       - name: Resolve image tag
