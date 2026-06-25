@@ -34,13 +34,9 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev')
     runs-on: ubuntu-latest
     name: Generate DEV manifests
-    environment: dev
-
     env:
-      ARM_CLIENT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}"
-      ARM_SUBSCRIPTION_ID: "${{ secrets.ASGERTHYREGODDK_DEV_SUBSCRIPTION_ID }}"
-      ARM_TENANT_ID: "${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}"
-      ARM_USE_AZUREAD: true
+      SCW_ACCESS_KEY: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
+      SCW_SECRET_KEY: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
 
     steps:
       - uses: actions/checkout@v4
@@ -57,22 +53,15 @@ jobs:
       - name: Install Terraform
         run: bash "${{ github.workspace }}/asgerthyregoddk/.github/scripts/install_terraform.sh" 
 
-      - name: 'Az CLI login'
-        uses: azure/login@v3
-        with:
-          client-id: ${{ secrets.ASGERTHYREGODDK_DEV_CLIENT_ID }}
-          tenant-id: ${{ secrets.ASGERTHYREGODDK_DEV_TENANT_ID }}
-          subscription-id: ${{ secrets.ASGERTHYREGODDK_DEV_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
-
+      # TODO: Rewrite this
       - name: Resolve image tag
         id: resolve_tag
         uses: azure/powershell@v3
         with:
           azPSVersion: latest
           inlineScript: |
-            ./asgerthyregoddk/.github/scripts/fetch_latest_image_version.ps1 `
-              -acrUrl "tgclzdevacr.azurecr.io" `
+            ./asgerthyregoddk/.github/scripts.ps1 `
+              -registryNamespace "crn-shared-prd-scr-lz-fr-par" `
               -imageName "tgc-atdk-app" `
               -inputTag "${{ github.event.inputs.version || 'latest' }}"
 
@@ -90,9 +79,9 @@ jobs:
       - name: Terraform Init
         run: |
           terraform init \
-          -backend-config=resource_group_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_RESOURCE_GROUP_NAME }}" \
-          -backend-config=storage_account_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_ACCOUNT_NAME }}" \
-          -backend-config=container_name="${{ secrets.ASGERTHYREGODDK_DEV_TFSTATE_STORAGE_CONTAINER_NAME }}" \
+          -backend-config=access_key="${{ secrets.ASGERTHYREGODDK_PRD_STATE_ACCESS_KEY }}" \
+          -backend-config=secret_key="${{ secrets.ASGERTHYREGODDK_PRD_STATE_SECRET_ACCESS_KEY }}" \
+          -backend-config=bucket="${{ secrets.ASGERTHYREGODDK_PRD_STATE_BUCKET_NAME }}" \
           -backend-config=key="asgerthyregoddk.deployment.dev"
         working-directory: asgerthyregoddk/terraform/deployment
           
