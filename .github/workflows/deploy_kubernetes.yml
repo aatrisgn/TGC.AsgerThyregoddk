@@ -37,6 +37,7 @@ jobs:
     env:
       SCW_ACCESS_KEY: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
       SCW_SECRET_KEY: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
+      SCW_DEFAULT_ORGANIZATION_ID: "${{ secrets.ASGERTHYREGODDK_PRD_ORGANIZATION_ID }}"
 
     steps:
       - uses: actions/checkout@v4
