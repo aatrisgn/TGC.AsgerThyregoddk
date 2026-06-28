@@ -31,7 +31,7 @@ permissions:
 
 jobs:
   call-build:
-    uses: aatrisgn/TGC.LandingZones/.github/workflows/wfc_deploy_k8_manifests.yml@main
+    uses: aatrisgn/TGC.Templates/.github/workflows/wfc_deploy_k8_manifests.yml@main
     with:
       working_directory: asgerthyregoddk/terraform/deployment
       applyTF: ${{ github.event.inputs.applyTF }}
