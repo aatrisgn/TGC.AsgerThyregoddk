@@ -40,8 +40,8 @@ jobs:
       image_name: "tgc-atdk-app"
       container_registry: "crn-shared-prd-scr-lz-fr-par"
       app_version: ${{ github.event.inputs.version }}
-      helm_output_dir: "deployment/dev"
-      helm_input_values_file: "helm/values-dev.yaml"
+      helm_output_dir: "./deployment/dev"
+      helm_input_values_file: "./helm/values-dev.yaml"
     secrets:
       deployment_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
       deployment_secret_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
