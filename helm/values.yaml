@@ -2,7 +2,7 @@ env: dev
 namespace: asgerthyregoddkdev
 appName: asgerthyregoddk
 
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: rg.fr-par.scw.cloud/crn-shared-prd-scr-lz-fr-par/tgc-atdk-app
