@@ -5,7 +5,7 @@ appName: asgerthyregoddk
 replicaCount: 1
 
 image:
-  repository: tgclzdevacr.azurecr.io/tgc-atdk-app
+  repository: rg.fr-par.scw.cloud/crn-shared-prd-scr-lz-fr-par/tgc-atdk-app
   tag: 325ff3abb4d93e0bd0f5e891012064836f80cca9
   pullSecret: acr-pull
 
