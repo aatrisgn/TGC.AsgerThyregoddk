@@ -39,7 +39,7 @@ jobs:
       application_repo: "TGC.AsgerThyregodDK"
       image_name: "tgc-atdk-app"
       container_registry: "crn-shared-prd-scr-lz-fr-par"
-      app_version: ${{ github.event.inputs.version }}
+      app_version: ${{ github.event.inputs.version || 'latest' }}
       helm_output_dir: "./deployment/dev"
       helm_input_values_file: "./helm/values-dev.yaml"
     secrets:
