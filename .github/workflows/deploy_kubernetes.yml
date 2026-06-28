@@ -43,6 +43,7 @@ jobs:
       app_version: ${{ github.event.inputs.version || 'latest' }}
       helm_output_dir: "./deployment/dev"
       helm_input_values_file: "./helm/values-dev.yaml"
+      var_file_path: "envs/vars.dev.tfvars"
     secrets:
       deployment_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
       deployment_secret_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
@@ -66,6 +67,7 @@ jobs:
       app_version: ${{ github.event.inputs.version || 'latest' }}
       helm_output_dir: "./deployment/prd"
       helm_input_values_file: "./helm/values-prd.yaml"
+      var_file_path: "envs/vars.prd.tfvars"
     secrets:
       deployment_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_ACCESS_KEY }}"
       deployment_secret_access_key: "${{ secrets.ASGERTHYREGODDK_PRD_DEPLOYMENT_SECRET_ACCESS_KEY }}"
