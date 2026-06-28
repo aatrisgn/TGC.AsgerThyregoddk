@@ -27,15 +27,3 @@ spec:
         image: rg.fr-par.scw.cloud/crn-shared-prd-scr-lz-fr-par/tgc-atdk-app:325ff3abb4d93e0bd0f5e891012064836f80cca9
         ports:
         - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3

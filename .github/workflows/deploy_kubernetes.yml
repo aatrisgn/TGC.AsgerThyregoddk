@@ -33,7 +33,7 @@ jobs:
   call-build:
     uses: aatrisgn/TGC.Templates/.github/workflows/wfc_deploy_k8_manifests.yml@main
     with:
-      working_directory: asgerthyregoddk/terraform/deployment
+      working_directory: "TGC.AsgerThyregodDK/terraform/deployment"
       applyTF: ${{ github.event.inputs.applyTF }}
       state_key: "asgerthyregoddk.deployment.dev"
       application_repo: "TGC.AsgerThyregodDK"
