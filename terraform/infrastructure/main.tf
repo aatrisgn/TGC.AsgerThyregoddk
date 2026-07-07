@@ -4,6 +4,6 @@ resource "scaleway_domain_record" "a_records" {
   dns_zone = "asgerthyregod.dk"
   name     = each.value
   type     = "A"
-  data     = "137.117.132.68"
+  data     = "51.15.251.138"
   ttl      = 3600
 }
